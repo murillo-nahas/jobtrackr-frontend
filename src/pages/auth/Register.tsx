@@ -37,7 +37,10 @@ export default function Register() {
   return (
     <AuthLayout>
       <div className="max-w-md w-full px-8">
-        <h1 className="text-xl font-bold text-gray-800">Create an account</h1>
+        <h1 className="text-xl font-bold text-gray-800">Welcome to Jobtrackr</h1>
+        <p className="mt-1 text-sm text-gray-600">
+          Create your account and start tracking applications
+        </p>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 space-y-4">
             <FormField
