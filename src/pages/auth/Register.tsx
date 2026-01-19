@@ -3,22 +3,34 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { AuthLayout } from "./components/AuthLayout";
+import { useRegister } from "@/hooks/useRegister";
 
-const registerSchema = z.object({
-  name: z.string().min(3, "Name should be at least 3 characters"),
-  email: z.email("Invalid email"),
-  password: z.string().min(6, "Password should be at least 6 characters"),
-  confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-});
+const registerSchema = z
+  .object({
+    name: z.string().min(3, "Name should be at least 3 characters"),
+    email: z.email("Invalid email"),
+    password: z.string().min(6, "Password should be at least 6 characters"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export default function Register() {
+  const registerMutation = useRegister();
+
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     mode: "onBlur",
@@ -28,11 +40,15 @@ export default function Register() {
       password: "",
       confirmPassword: "",
     },
-  })
+  });
 
   const onSubmit = (data: RegisterFormValues): void => {
-    console.log(data)
-  }
+    registerMutation.mutate({
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    });
+  };
 
   return (
     <AuthLayout>
@@ -99,7 +115,13 @@ export default function Register() {
               )}
             />
 
-            <Button type="submit" className="w-full">Register</Button>
+            {registerMutation.isError && (
+              <p className="text-sm text-red-600">{registerMutation.error.message}</p>
+            )}
+
+            <Button type="submit" disabled={registerMutation.isPending} className="w-full">
+              {registerMutation.isPending ? "Creating account..." : "Register"}
+            </Button>
           </form>
         </Form>
       </div>
