@@ -1,24 +1,23 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { PasswordInput } from "@/components/ui/password-input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { AuthLayout } from "./components/AuthLayout";
-
-const registerSchema = z.object({
-  name: z.string().min(3, "Name should be at least 3 characters"),
-  email: z.email("Invalid email"),
-  password: z.string().min(6, "Password should be at least 6 characters"),
-  confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-});
-
-type RegisterFormValues = z.infer<typeof registerSchema>;
+import { useRegister } from "@/hooks/useRegister";
+import { registerSchema, type RegisterFormValues } from "@/lib/schemas/auth";
 
 export default function Register() {
+  const registerMutation = useRegister();
+
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     mode: "onBlur",
@@ -28,11 +27,15 @@ export default function Register() {
       password: "",
       confirmPassword: "",
     },
-  })
+  });
 
   const onSubmit = (data: RegisterFormValues): void => {
-    console.log(data)
-  }
+    registerMutation.mutate({
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    });
+  };
 
   return (
     <AuthLayout>
@@ -78,7 +81,7 @@ export default function Register() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
+                    <PasswordInput placeholder="••••••••" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -92,14 +95,20 @@ export default function Register() {
                 <FormItem>
                   <FormLabel>Confirm password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
+                    <PasswordInput placeholder="••••••••" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            <Button type="submit" className="w-full">Register</Button>
+            {registerMutation.isError && (
+              <p className="text-sm text-red-600">{registerMutation.error.message}</p>
+            )}
+
+            <Button type="submit" disabled={registerMutation.isPending} className="w-full cursor-pointer">
+              {registerMutation.isPending ? "Creating account..." : "Register"}
+            </Button>
           </form>
         </Form>
       </div>

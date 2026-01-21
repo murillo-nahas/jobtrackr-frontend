@@ -2,8 +2,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
       <div className="relative w-[30%] overflow-hidden bg-gray-950 flex items-center justify-center">
-
-      <div
+        <div
           className="absolute inset-0 opacity-100"
           style={{
             backgroundImage: `
@@ -18,13 +17,9 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
         <div className="absolute -bottom-44 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full border border-white/10 opacity-40" />
         <div className="absolute -bottom-52 left-1/2 h-[680px] w-[680px] -translate-x-1/2 rounded-full border border-white/5 opacity-40" />
 
-        <h1 className="relative text-3xl font-semibold text-white tracking-wide">
-          Jobtrackr
-        </h1>
+        <h1 className="relative text-3xl font-semibold text-white tracking-wide">Jobtrackr</h1>
       </div>
-      <div className="w-[70%] flex items-center justify-center">
-        {children}
-      </div>
+      <div className="w-[70%] flex items-center justify-center">{children}</div>
     </div>
   );
 }
