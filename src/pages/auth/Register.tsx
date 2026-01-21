@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -13,20 +12,7 @@ import {
 } from "@/components/ui/form";
 import { AuthLayout } from "./components/AuthLayout";
 import { useRegister } from "@/hooks/useRegister";
-
-const registerSchema = z
-  .object({
-    name: z.string().min(3, "Name should be at least 3 characters"),
-    email: z.email("Invalid email"),
-    password: z.string().min(6, "Password should be at least 6 characters"),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  });
-
-type RegisterFormValues = z.infer<typeof registerSchema>;
+import { registerSchema, type RegisterFormValues } from "@/lib/schemas/auth";
 
 export default function Register() {
   const registerMutation = useRegister();
@@ -119,7 +105,7 @@ export default function Register() {
               <p className="text-sm text-red-600">{registerMutation.error.message}</p>
             )}
 
-            <Button type="submit" disabled={registerMutation.isPending} className="w-full">
+            <Button type="submit" disabled={registerMutation.isPending} className="w-full cursor-pointer">
               {registerMutation.isPending ? "Creating account..." : "Register"}
             </Button>
           </form>
