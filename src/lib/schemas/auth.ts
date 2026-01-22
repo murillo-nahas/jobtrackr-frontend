@@ -27,3 +27,4 @@ export type User = z.infer<typeof userSchema>;
 export type RegisterFormValues = z.infer<typeof registerSchema>;
 export type RegisterData = Omit<RegisterFormValues, "confirmPassword">;
 export type LoginFormValues = z.infer<typeof loginSchema>;
+export type LoginData = z.infer<typeof loginSchema>;
