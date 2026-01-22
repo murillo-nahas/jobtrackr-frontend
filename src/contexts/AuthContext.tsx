@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 
 interface AuthContextType {
   token: string | null;
@@ -16,6 +16,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const setToken = (newToken: string | null): void => {
     setTokenState(newToken);
+
     if (newToken) {
       localStorage.setItem("token", newToken);
     } else {
@@ -26,6 +27,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = (): void => {
     setToken(null);
   };
+
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent): void => {
+      if (e.key === "token") {
+        setTokenState(e.newValue);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   return (
     <AuthContext.Provider

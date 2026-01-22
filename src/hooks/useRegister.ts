@@ -15,7 +15,7 @@ export function useRegister() {
       navigate("/applications");
     },
     onError: (error: Error) => {
-      console.error("Registration failed:", error.message);
+      console.error("Registration failed: ", error.message);
     },
   });
 }
