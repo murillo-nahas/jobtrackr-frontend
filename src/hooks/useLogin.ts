@@ -12,7 +12,7 @@ export function useLogin() {
     mutationFn: (data: LoginData) => api.auth.login(data),
     onSuccess: (response) => {
       setToken(response.access_token);
-      navigate("/applications");
+      navigate("/dashboard");
     },
   });
 }

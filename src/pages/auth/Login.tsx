@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,9 +17,11 @@ import {
 import { useLogin } from "@/hooks/useLogin";
 import { loginSchema, type LoginFormValues } from "@/lib/schemas/auth";
 import { AuthLayout } from "./components/AuthLayout";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Login() {
   const loginMutation = useLogin();
+  const { isAuthenticated } = useAuth();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -33,6 +35,10 @@ export default function Login() {
   const onSubmit = (data: LoginFormValues): void => {
     loginMutation.mutate(data);
   };
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
 
   return (
     <AuthLayout>

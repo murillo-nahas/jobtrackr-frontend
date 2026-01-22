@@ -12,7 +12,7 @@ export function useRegister() {
     mutationFn: (data: RegisterData) => api.auth.register(data),
     onSuccess: (response) => {
       setToken(response.access_token);
-      navigate("/applications");
+      navigate("/dashboard");
     },
     onError: (error: Error) => {
       console.error("Registration failed: ", error.message);
