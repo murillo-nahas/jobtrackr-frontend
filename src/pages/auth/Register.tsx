@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "react-router";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
@@ -11,9 +13,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { AuthLayout } from "./components/AuthLayout";
+
 import { useRegister } from "@/hooks/useRegister";
 import { registerSchema, type RegisterFormValues } from "@/lib/schemas/auth";
+import { AuthLayout } from "./components/AuthLayout";
+import { ArrowLeft } from "lucide-react";
 
 export default function Register() {
   const registerMutation = useRegister();
@@ -40,6 +44,8 @@ export default function Register() {
   return (
     <AuthLayout>
       <div className="max-w-md w-full px-8">
+        <Link to="/"><ArrowLeft className="text-gray-800 hover:text-gray-600 h-6 w-6 my-4" /></Link>
+
         <h1 className="text-xl font-bold text-gray-800">Welcome to Jobtrackr</h1>
         <p className="mt-1 text-sm text-gray-600">
           Create your account and start tracking applications
@@ -106,11 +112,18 @@ export default function Register() {
               <p className="text-sm text-red-600">{registerMutation.error.message}</p>
             )}
 
-            <Button type="submit" disabled={registerMutation.isPending} className="w-full cursor-pointer">
+            <Button type="submit" disabled={registerMutation.isPending} className="w-full">
               {registerMutation.isPending ? "Creating account..." : "Register"}
             </Button>
           </form>
         </Form>
+
+        <p className="mt-4 text-center text-sm text-gray-600">
+          Already have an account?{" "}
+          <Link to="/login" className="font-medium text-gray-800 hover:underline">
+            Sign in
+          </Link>
+        </p>
       </div>
     </AuthLayout>
   );
