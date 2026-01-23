@@ -43,10 +43,11 @@ export default function Login() {
   return (
     <AuthLayout>
       <div className="max-w-md w-full px-8">
+        <div className="flex items-center justify-center">
+          <img src="/jobtrackr-variant.png" className="w-48 cursor-pointer" alt="Jobtrackr" />
+        </div>
         <h1 className="text-xl font-bold text-gray-800">Welcome back</h1>
-        <p className="mt-1 text-sm text-gray-600">
-          Sign in to continue tracking your applications
-        </p>
+        <p className="mt-1 text-sm text-gray-600">Sign in to continue tracking your applications</p>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 space-y-4">
