@@ -50,7 +50,9 @@ export default function Register() {
   return (
     <AuthLayout>
       <div className="max-w-md w-full px-8">
-        <Link to="/login"><ArrowLeft className="text-gray-800 hover:text-gray-600 h-6 w-6 my-4" /></Link>
+        <Link to="/login">
+          <ArrowLeft className="text-gray-800 hover:text-gray-600 h-6 w-6 my-4" />
+        </Link>
 
         <h1 className="text-xl font-bold text-gray-800">Welcome to Jobtrackr</h1>
         <p className="mt-1 text-sm text-gray-600">
