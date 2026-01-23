@@ -4,5 +4,5 @@ import { Navigate } from "react-router";
 export default function RootRedirect() {
   const { isAuthenticated } = useAuth();
 
-  return (<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />);
+  return <Navigate to={isAuthenticated ? "/dashboard" : "/login"} />;
 }
