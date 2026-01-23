@@ -1,7 +1,7 @@
 export default function Settings() {
   return (
     <div>
-      <h1>User Settings</h1>
+      <h1>user settings works</h1>
     </div>
   );
 }
