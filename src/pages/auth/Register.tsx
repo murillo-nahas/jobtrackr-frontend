@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,9 +18,11 @@ import { useRegister } from "@/hooks/useRegister";
 import { registerSchema, type RegisterFormValues } from "@/lib/schemas/auth";
 import { AuthLayout } from "./components/AuthLayout";
 import { ArrowLeft } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Register() {
   const registerMutation = useRegister();
+  const { isAuthenticated } = useAuth();
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -41,10 +43,16 @@ export default function Register() {
     });
   };
 
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
+
   return (
     <AuthLayout>
       <div className="max-w-md w-full px-8">
-        <Link to="/"><ArrowLeft className="text-gray-800 hover:text-gray-600 h-6 w-6 my-4" /></Link>
+        <Link to="/login">
+          <ArrowLeft className="text-gray-800 hover:text-gray-600 h-6 w-6 my-4" />
+        </Link>
 
         <h1 className="text-xl font-bold text-gray-800">Welcome to Jobtrackr</h1>
         <p className="mt-1 text-sm text-gray-600">

@@ -6,18 +6,28 @@ import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import ProtectedRoute from "./components/ProtectedRoute";
+import RootRedirect from "./components/RootRedirect";
+import AppLayout from "./components/AppLayout";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<RootRedirect />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        <Route path="/dashboard" element={<List />} />
-        <Route path="/applications/new" element={<Form />} />
-        <Route path="/applications/:id/edit" element={<Form />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<AppLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/applications" element={<List />} />
+            <Route path="/applications/new" element={<Form />} />
+            <Route path="/applications/:id/edit" element={<Form />} />
+            <Route path="/settings" element={<Settings />} />
+          </Route>
+        </Route>
 
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -17,7 +17,11 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
         <div className="absolute -bottom-44 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full border border-white/10 opacity-40" />
         <div className="absolute -bottom-52 left-1/2 h-[680px] w-[680px] -translate-x-1/2 rounded-full border border-white/5 opacity-40" />
 
-        <h1 className="relative text-3xl font-semibold text-white tracking-wide">Jobtrackr</h1>
+        <div className="flex items-center justify-center flex-col">
+          <h1 className="mt-4 relative text-3xl font-semibold text-white tracking-wide">
+            Jobtrackr
+          </h1>
+        </div>
       </div>
       <div className="w-[70%] flex items-center justify-center">{children}</div>
     </div>
