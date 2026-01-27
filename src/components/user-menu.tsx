@@ -1,5 +1,6 @@
-import { useUser } from "@/hooks/useUser";
 import { User } from "lucide-react";
+
+import { useUser } from "@/hooks/use-user";
 
 export default function UserMenu() {
   function getUserInitials(name: string): string {

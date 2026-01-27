@@ -1,15 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 
-import List from "./pages/applications/List";
-import Form from "./pages/applications/Form";
-import Settings from "./pages/Settings";
-import NotFound from "./pages/NotFound";
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import ProtectedRoute from "./components/ProtectedRoute";
-import RootRedirect from "./components/RootRedirect";
-import AppLayout from "./components/AppLayout";
-import Dashboard from "./pages/Dashboard";
+import AppLayout from "./components/app-layout";
+import ProtectedRoute from "./components/protected-route";
+import RootRedirect from "./components/root-redirect";
+import Form from "./pages/applications/form";
+import List from "./pages/applications/list";
+import Login from "./pages/auth/login";
+import Register from "./pages/auth/register";
+import Dashboard from "./pages/dashboard";
+import NotFound from "./pages/not-found";
+import Settings from "./pages/settings";
 
 function App() {
   return (

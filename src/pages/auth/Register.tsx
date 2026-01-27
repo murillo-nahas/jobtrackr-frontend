@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, Navigate } from "react-router";
+import { ArrowLeft } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,11 +15,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { useRegister } from "@/hooks/useRegister";
+import { useAuth } from "@/contexts/auth-context";
+import { useRegister } from "@/hooks/use-register";
 import { registerSchema, type RegisterFormValues } from "@/lib/schemas/auth";
-import { AuthLayout } from "./components/AuthLayout";
-import { ArrowLeft } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContext";
+import { AuthLayout } from "./components/auth-layout";
 
 export default function Register() {
   const registerMutation = useRegister();

@@ -1,6 +1,7 @@
-import { Menu } from "lucide-react";
-import UserMenu from "./UserMenu";
 import { NavLink } from "react-router";
+import { Menu } from "lucide-react";
+
+import UserMenu from "./user-menu";
 
 export default function Header() {
   return (
