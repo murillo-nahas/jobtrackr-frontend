@@ -1,5 +1,6 @@
-import { useAuth } from "@/contexts/AuthContext";
 import { Navigate } from "react-router";
+
+import { useAuth } from "@/contexts/auth-context";
 
 export default function RootRedirect() {
   const { isAuthenticated } = useAuth();

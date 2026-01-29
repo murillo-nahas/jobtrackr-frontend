@@ -14,10 +14,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { useLogin } from "@/hooks/useLogin";
+import { useAuth } from "@/contexts/auth-context";
+import { useLogin } from "@/hooks/use-login";
 import { loginSchema, type LoginFormValues } from "@/lib/schemas/auth";
-import { AuthLayout } from "./components/AuthLayout";
-import { useAuth } from "@/contexts/AuthContext";
+import { AuthLayout } from "./components/auth-layout";
 
 export default function Login() {
   const loginMutation = useLogin();

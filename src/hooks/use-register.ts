@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { api } from "@/lib/api";
-import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router";
+
+import { useAuth } from "@/contexts/auth-context";
+import { api } from "@/lib/api";
 import { type RegisterData } from "@/lib/schemas/auth";
 
 export function useRegister() {

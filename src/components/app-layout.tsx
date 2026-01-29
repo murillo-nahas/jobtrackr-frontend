@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
-import Sidebar from "./Sidebar";
-import Header from "./Header";
+
+import Header from "./header";
+import Sidebar from "./sidebar";
 
 export default function AppLayout() {
   return (
